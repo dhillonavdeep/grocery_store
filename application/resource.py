@@ -21,8 +21,10 @@ product_details_fields = {
 }
 
 class ProductDetails(Resource):
+    @marshal_with(product_details_fields)
     def get(self):
-        return { "message":"Hello from api"}
+        all_product_fields=Product.query.all()
+        return all_product_fields
     def post(self):
         args=parser.parse_args()
         Product_detail=Product(**args)
